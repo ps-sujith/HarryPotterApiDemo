@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "HarryPotterApiDemo"
 include(":app")
- 
+include(":ui")
+include(":data")
+include(":domain")

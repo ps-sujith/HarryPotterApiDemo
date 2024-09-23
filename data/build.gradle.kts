@@ -1,26 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.daggerHilt)
-    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
 }
 
 android {
-    namespace = "com.sujith.harrypotterapi"
+    namespace = "com.sujith.data"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sujith.harrypotterapi"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -39,33 +32,20 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-    implementation(project(":ui"))
-    implementation(project(":data"))
     implementation(project(":domain"))
-    //Core
-    implementation(libs.bundles.core)
-    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     //Retrofit
     implementation(libs.bundles.retrofit)
     //Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
-    //Navigation
-    implementation(libs.bundles.navigation)
-    //Coil
-    implementation(libs.coil.compose)
+    //Unit test
+    testImplementation(libs.bundles.unitTest)
+    androidTestImplementation(libs.bundles.uiTest)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.bundles.debugImpl)
 }
