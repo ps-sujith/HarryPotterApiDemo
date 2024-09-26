@@ -16,6 +16,7 @@ import androidx.navigation.toRoute
 import com.sujith.ui.feature_characterDetail.CharacterListDetailScreen
 import com.sujith.ui.feature_characterList.CharacterListScreen
 import com.sujith.ui.feature_characterList.viewmodel.CharacterListViewmodel
+import com.sujith.ui.feature_search.SearchScreen
 import com.sujith.ui.feature_splash.SplashScreen
 
 @Composable
@@ -30,7 +31,9 @@ fun AppNavigation() {
                 val characterListVM =
                     entry.sharedViewModel<CharacterListViewmodel>(navController = navController)
                 val characterListUiState by characterListVM.characterListUiState.collectAsStateWithLifecycle()
-                CharacterListScreen(navController, characterListUiState)
+                CharacterListScreen(navController, characterListUiState) {
+                    navController.navigate(Search)
+                }
             }
             composable<CharacterListDetail> { entry ->
                 val characterListVM =
@@ -43,6 +46,12 @@ fun AppNavigation() {
                 CharacterListDetailScreen(characterDetails) {
                     navController.navigateUp()
                 }
+            }
+            composable<Search> {entry ->
+                val characterListVM =
+                    entry.sharedViewModel<CharacterListViewmodel>(navController = navController)
+                val characterListUiState by characterListVM.characterListUiState.collectAsStateWithLifecycle()
+                SearchScreen(characterListUiState,navController)
             }
         }
     }

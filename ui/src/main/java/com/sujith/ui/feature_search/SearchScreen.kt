@@ -1,4 +1,4 @@
-package com.sujith.ui.feature_characterList
+package com.sujith.ui.feature_search
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,63 +8,63 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
+import com.sujith.domain.characterList.model.CharacterItem
 import com.sujith.ui.R
 import com.sujith.ui.feature_characterList.component.CharacterListItemScreen
 import com.sujith.ui.feature_characterList.component.CharacterListUiState
+import com.sujith.ui.feature_search.components.SearchField
 import com.sujith.ui.navigation.CharacterListDetail
 import com.sujith.ui.utils.ErrorView
 import com.sujith.ui.utils.Lottie
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CharacterListScreen(
-    navController: NavHostController,
+fun SearchScreen(
     characterListUiState: CharacterListUiState,
-    onSearchSelected: () -> Unit
+    navController: NavController,
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    var value by rememberSaveable { mutableStateOf("") }
+
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
-                scrollBehavior = scrollBehavior,
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 ),
                 title = {
-                    Text(
-                        text = stringResource(id = R.string.harry_potter),
-                        fontSize = dimensionResource(id = R.dimen.app_bar_title_size).value.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
+                    SearchField { query ->
+                        value = query
+                    }
                 },
                 actions = {
-                    IconButton(onClick = { onSearchSelected() }) {
+                    IconButton(
+                        onClick = {
+                            navController.navigateUp()
+                        }
+                    ) {
                         Icon(
-                            imageVector = Icons.Filled.Search,
-                            contentDescription = "Search",
-                            tint = MaterialTheme.colorScheme.onBackground
+                            imageVector = Icons.Rounded.Close,
+                            contentDescription = stringResource(id = R.string.search_close_icon)
                         )
                     }
                 })
@@ -74,9 +74,33 @@ fun CharacterListScreen(
                 .fillMaxSize()
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
-
         ) {
-            if (characterListUiState.isLoading) {
+            if (!characterListUiState.characterList.isNullOrEmpty() && value.isNotEmpty()) {
+                val searchResults: List<CharacterItem> = try {
+                    characterListUiState.characterList.filter {
+                        it.name!!.contains(value, ignoreCase = true)
+                    }
+                } catch (e: Exception) {
+                    emptyList()
+                }
+
+
+                if (searchResults.isNotEmpty()) {
+                    LazyVerticalGrid(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        columns = GridCells.Fixed(2),
+                        content = {
+                            items(searchResults) { characterItem ->
+                                CharacterListItemScreen(characterItem) { characterId ->
+                                    navController.navigate(CharacterListDetail(characterId))
+                                }
+                            }
+                        })
+                } else {
+                    ErrorView(error = stringResource(id = R.string.no_results))
+                }
+            } else {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.surface
@@ -88,22 +112,8 @@ fun CharacterListScreen(
                         modifier = Modifier.size(dimensionResource(id = R.dimen.loader_size_small))
                     )
                 }
-            } else {
-                if (!characterListUiState.characterList.isNullOrEmpty()) {
-                    LazyVerticalGrid(
-                        modifier = Modifier.fillMaxSize(),
-                        columns = GridCells.Fixed(2),
-                        content = {
-                            items(characterListUiState.characterList) { characterItem ->
-                                CharacterListItemScreen(characterItem) { characterId ->
-                                    navController.navigate(CharacterListDetail(characterId))
-                                }
-                            }
-                        })
-                } else {
-                    ErrorView(error = "Something Went wrong !!")
-                }
             }
         }
     }
+
 }

@@ -1,3 +1,7 @@
 <resources>
     <string name="harry_potter">HARRY POTTER</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="search_character">Search Characters</string>
+    <string name="no_results">No results found</string>
+    <string name="search_close_icon">Search close icon</string>
 </resources>

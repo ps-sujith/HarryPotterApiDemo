@@ -33,7 +33,7 @@ class RemoteCharacterListDataSourceShould : BaseUnitTest() {
     @Test
     fun `return exception  when api fails `() = runTest {
         mockFailureCase()
-        assertEquals(null, remoteCharacterListDataSource.getAllCharacters())
+        assertEquals(emptyList<CharacterItemDto>(), remoteCharacterListDataSource.getAllCharacters())
     }
 
     private suspend fun mockSuccessfulCase() {

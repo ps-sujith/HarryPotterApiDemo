@@ -44,7 +44,7 @@ fun CharacterListItemScreen(characterItem: CharacterItem, onItemClick: (String) 
         HouseColor.Slytherin.toString() -> slytherin
         HouseColor.Ravenclaw.toString() -> ravenclaw
         HouseColor.Hufflepuff.toString() -> hufflepuff
-        else -> Color.Blue
+        else -> Color.Transparent
     }
     Card(modifier = Modifier
         .fillMaxSize()

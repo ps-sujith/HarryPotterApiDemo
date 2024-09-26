@@ -3,6 +3,9 @@ package com.sujith.ui.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
+object HarryPotterApp
+
+@Serializable
 object Splash
 
 @Serializable
@@ -12,4 +15,4 @@ object CharacterList
 data class CharacterListDetail(val characterID: String)
 
 @Serializable
-object HarryPotterApp
+object Search
