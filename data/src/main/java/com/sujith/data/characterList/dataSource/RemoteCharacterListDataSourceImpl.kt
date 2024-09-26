@@ -7,6 +7,10 @@ import javax.inject.Inject
 class RemoteCharacterListDataSourceImpl @Inject constructor(private val apiService: HarryPotterApiService) :
     RemoteCharacterListDataSource {
     override suspend fun getAllCharacters(): List<CharacterItemDto> {
-        return apiService.getAllCharacters().ifEmpty { emptyList() }
+        return try {
+            apiService.getAllCharacters().ifEmpty { emptyList() }
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }

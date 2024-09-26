@@ -47,5 +47,4 @@ dependencies {
     testImplementation(libs.bundles.unitTest)
     androidTestImplementation(libs.bundles.uiTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.bundles.debugImpl)
 }

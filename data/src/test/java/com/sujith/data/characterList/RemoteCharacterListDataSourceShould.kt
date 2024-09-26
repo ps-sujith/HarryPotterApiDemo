@@ -5,8 +5,8 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.sujith.data.characterList.api.HarryPotterApiService
-import com.sujith.data.characterList.dto.CharacterItemDto
 import com.sujith.data.characterList.dataSource.RemoteCharacterListDataSourceImpl
+import com.sujith.data.characterList.dto.CharacterItemDto
 import com.sujith.data.utils.BaseUnitTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals

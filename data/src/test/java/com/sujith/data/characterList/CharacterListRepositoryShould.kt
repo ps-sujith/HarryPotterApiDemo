@@ -5,12 +5,11 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.sujith.data.characterList.dataSource.RemoteCharacterListDataSource
 import com.sujith.data.characterList.dto.CharacterItemDto
 import com.sujith.data.characterList.dto.WandDto
 import com.sujith.data.characterList.repository.CharacterListRepositoryImpl
-import com.sujith.data.characterList.dataSource.RemoteCharacterListDataSource
 import com.sujith.data.utils.BaseUnitTest
-import com.sujith.domain.characterList.model.CharacterItem
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -1,9 +1,9 @@
-package com.sujith.ui.feature.characterList.viewmodel
+package com.sujith.ui.feature_characterList.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sujith.domain.characterList.usecase.GetCharacterListUseCase
-import com.sujith.ui.feature.characterList.screen.CharacterListUiState
+import com.sujith.ui.feature_characterList.component.CharacterListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

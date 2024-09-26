@@ -23,7 +23,7 @@ fun CharacterItemDto.toDomain() = CharacterItem(
     name = name,
     patronus = patronus,
     species = species,
-    wand = wand.toDomain(),
+    wand = wand?.toDomain(),
     wizard = wizard,
     yearOfBirth = yearOfBirth
 )

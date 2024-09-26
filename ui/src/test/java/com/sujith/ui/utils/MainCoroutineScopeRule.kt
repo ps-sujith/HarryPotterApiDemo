@@ -1,4 +1,4 @@
-package com.sujith.harrypotterapi.utils
+package com.sujith.ui.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

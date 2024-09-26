@@ -5,52 +5,52 @@ import com.google.gson.annotations.SerializedName
 
 data class CharacterItemDto(
     @SerializedName("actor")
-    val actor: String,
+    val actor: String?,
     @SerializedName("alive")
-    val alive: Boolean,
+    val alive: Boolean = false,
     @SerializedName("alternate_actors")
-    val alternateActors: List<String>,
+    val alternateActors: List<String> = emptyList(),
     @SerializedName("alternate_names")
-    val alternateNames: List<String>,
+    val alternateNames: List<String> = emptyList(),
     @SerializedName("ancestry")
-    val ancestry: String,
+    val ancestry: String?,
     @SerializedName("dateOfBirth")
-    val dateOfBirth: String,
+    val dateOfBirth: String?,
     @SerializedName("eyeColour")
-    val eyeColour: String,
+    val eyeColour: String?,
     @SerializedName("gender")
-    val gender: String,
+    val gender: String?,
     @SerializedName("hairColour")
-    val hairColour: String,
+    val hairColour: String?,
     @SerializedName("hogwartsStaff")
-    val hogwartsStaff: Boolean,
+    val hogwartsStaff: Boolean = false,
     @SerializedName("hogwartsStudent")
-    val hogwartsStudent: Boolean,
+    val hogwartsStudent: Boolean = false,
     @SerializedName("house")
-    val house: String,
+    val house: String?,
     @SerializedName("id")
     val id: String,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("patronus")
-    val patronus: String,
+    val patronus: String?,
     @SerializedName("species")
-    val species: String,
+    val species: String?,
     @SerializedName("wand")
-    val wand: WandDto,
+    val wand: WandDto?,
     @SerializedName("wizard")
-    val wizard: Boolean,
+    val wizard: Boolean = false,
     @SerializedName("yearOfBirth")
-    val yearOfBirth: Int
+    val yearOfBirth: Int = 0
 )
 
 data class WandDto(
     @SerializedName("core")
-    val core: String,
+    val core: String?,
     @SerializedName("length")
-    val length: Double,
+    val length: Double = 0.0,
     @SerializedName("wood")
-    val wood: String
+    val wood: String?
 )

@@ -53,9 +53,12 @@ dependencies {
     implementation(libs.bundles.navigation)
     //Coil
     implementation(libs.coil.compose)
+    //Lottie
+    implementation(libs.lottie)
     //Unit test
     testImplementation(libs.bundles.unitTest)
     androidTestImplementation(libs.bundles.uiTest)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.bundles.debugImpl)
+    debugImplementation(libs.bundles.debugImpl)
+    implementation (libs.ui.tooling.preview)
 }

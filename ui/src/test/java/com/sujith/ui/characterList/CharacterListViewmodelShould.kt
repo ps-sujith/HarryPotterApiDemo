@@ -7,10 +7,9 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.sujith.domain.characterList.model.CharacterItem
 import com.sujith.domain.characterList.usecase.GetCharacterListUseCase
-
+import com.sujith.ui.feature_characterList.component.CharacterListUiState
+import com.sujith.ui.feature_characterList.viewmodel.CharacterListViewmodel
 import com.sujith.ui.utils.BaseUnitTest
-import com.sujith.ui.feature.characterList.screen.CharacterListUiState
-import com.sujith.ui.feature.characterList.viewmodel.CharacterListViewmodel
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals

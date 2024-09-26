@@ -1,4 +1,4 @@
-package com.sujith.ui.feature.characterList.screen
+package com.sujith.ui.feature_characterList.component
 
 import com.sujith.domain.characterList.model.CharacterItem
 
