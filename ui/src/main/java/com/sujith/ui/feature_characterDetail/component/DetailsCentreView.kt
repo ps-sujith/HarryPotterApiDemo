@@ -41,7 +41,7 @@ fun DetailsCentreView(wand: Wand, houseColor: Color) {
             fontSize = dimensionResource(id = R.dimen.large_font_size).value.sp,
             style = TextStyle(
                 shadow = Shadow(
-                    color = houseColor, offset = Offset(1f, 1f), blurRadius = 50f
+                    color = houseColor, offset = Offset(1f, 1f), blurRadius = 10f
                 )
             ),
             textAlign = TextAlign.Center
